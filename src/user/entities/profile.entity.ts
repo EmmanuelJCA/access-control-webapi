@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { Gender } from '../interfaces';
@@ -51,24 +51,6 @@ export class Profile {
     comment: 'User gender enum "M" or "F"',
   })
   gender: Gender;
-
-  @ApiProperty({
-    example: '2002-08-20T00:00:00.000Z',
-    description: 'User birthdate',
-  })
-  @Column('date', { comment: 'User birthdate' })
-  birthdate: Date;
-
-  @ApiPropertyOptional({
-    example: '+584146380056',
-    description: 'User phone with telephone suffix',
-  })
-  @Column('text', {
-    nullable: true,
-    unique: true,
-    comment: 'User phone with telephone suffix',
-  })
-  phone?: string;
 
   @Exclude()
   @OneToOne(() => User, (user) => user.profile, {

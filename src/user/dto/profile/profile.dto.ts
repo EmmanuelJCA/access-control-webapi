@@ -1,24 +1,18 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
-  IsDate,
   IsEnum,
   IsOptional,
   IsString,
   Matches,
-  MaxDate,
-  MinDate,
   MinLength,
 } from 'class-validator';
-import { Type } from 'class-transformer';
 import { Gender } from '../../interfaces';
-
-const currentDate = new Date();
 
 export class ProfileDto {
   @ApiProperty({
     example: 'V-12345678',
     uniqueItems: true,
-    minLength: 10,
+    minLength: 8,
     description: 'User dni',
   })
   @IsString()
@@ -50,28 +44,6 @@ export class ProfileDto {
   })
   @IsEnum(Gender)
   gender: Gender;
-
-  @ApiProperty({
-    example: '2002-08-20T00:00:00.000Z',
-    description: 'User birthdate',
-  })
-  @Type(() => Date)
-  @IsDate()
-  @MinDate(
-    new Date(
-      currentDate.getFullYear() - 100,
-      currentDate.getMonth(),
-      currentDate.getDate(),
-    ),
-  )
-  @MaxDate(
-    new Date(
-      currentDate.getFullYear() - 15,
-      currentDate.getMonth(),
-      currentDate.getDate(),
-    ),
-  )
-  birthdate: Date;
 
   @ApiPropertyOptional({
     example: '+584146380056',
