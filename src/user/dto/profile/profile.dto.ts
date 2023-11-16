@@ -10,7 +10,7 @@ export class ProfileDto {
     description: 'User dni',
   })
   @IsString()
-  @MinLength(10)
+  @MinLength(8)
   identification: string;
 
   @ApiProperty({
