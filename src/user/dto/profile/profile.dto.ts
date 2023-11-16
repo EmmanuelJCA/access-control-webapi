@@ -1,11 +1,5 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  IsEnum,
-  IsOptional,
-  IsString,
-  Matches,
-  MinLength,
-} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEnum, IsString, MinLength } from 'class-validator';
 import { Gender } from '../../interfaces';
 
 export class ProfileDto {
@@ -44,14 +38,4 @@ export class ProfileDto {
   })
   @IsEnum(Gender)
   gender: Gender;
-
-  @ApiPropertyOptional({
-    example: '+584146380056',
-    description: 'User phone',
-    nullable: true,
-  })
-  @IsOptional()
-  @IsString()
-  @Matches(/^\+[1-9]{1}[0-9]{1,14}$/)
-  phone?: string;
 }
